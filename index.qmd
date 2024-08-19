@@ -1,6 +1,6 @@
-# Sobre el entrenamiento {.unnumbered}
+# Entrenamiento de R {.unnumbered}
 
-## 1. Introducción
+Vamos a tener un Liga de R
 
 
 # Facilitadora {.unnumbered}

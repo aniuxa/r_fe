@@ -5,7 +5,7 @@ project:
 book:
   title: "Entrenamiento de R"
   author: "Ana Escoto"
-  date: "06/10/2024"
+  date: "08/19/2024"
   site-url: https://fcpys.github.io/r_fe/
   repo-url: https://github.com/fcpys/r_fe/
   repo-branch: main
