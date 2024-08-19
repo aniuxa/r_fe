@@ -1,0 +1,26 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Entrenamiento de R"
+  author: "Ana Escoto"
+  date: "06/10/2024"
+  site-url: https://fcpys.github.io/r_fe/
+  repo-url: https://github.com/fcpys/r_fe/
+  repo-branch: main
+  repo-actions: [edit, issue]  
+  chapters:
+    - index.qmd
+    - instala.qmd
+    - P1.qmd
+
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+
+editor: visual
+
