@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./P2.html" rel="next">
 <link href="./instala.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -174,6 +175,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./P1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></a>
   </div>
 </li>
     </ul>
@@ -613,8 +619,8 @@ sum&gt; sum(1:5, NA, na.rm = TRUE)
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()           <span class="co"># Garbage collection, reporta memoria en uso</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  638761 34.2    1344154 71.8         NA  1344154 71.8
-Vcells 1195960  9.2    8388608 64.0      16384  2160936 16.5</code></pre>
+Ncells  638773 34.2    1344187 71.8         NA  1344187 71.8
+Vcells 1195987  9.2    8388608 64.0      16384  2160962 16.5</code></pre>
 </div>
 </div>
 <p>Para borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment</p>
@@ -635,9 +641,12 @@ Vcells 1195960  9.2    8388608 64.0      16384  2160936 16.5</code></pre>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()      <span class="co"># Lista de archivos en ese directorio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "LICENSE"      "P1.qmd"       "P1.rmarkdown" "README.md"    "_quarto.yml" 
- [6] "datos"        "docs"         "index.html"   "index.qmd"    "instala.html"
-[11] "instala.qmd"  "r_fe.Rproj"   "site_libs"   </code></pre>
+<pre><code> [1] "LICENSE"             "Mi_Exportación.xlsx" "P1.qmd"             
+ [4] "P1.rmarkdown"        "P2.qmd"              "README.md"          
+ [7] "_quarto.yml"         "datos"               "docs"               
+[10] "index.html"          "index.qmd"           "instala.html"       
+[13] "instala.qmd"         "r_fe.Rproj"          "r_fe3"              
+[16] "site_libs"          </code></pre>
 </div>
 </div>
 <p>Checar que esto también se puede hacer desde el menú:</p>
@@ -973,6 +982,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./P2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

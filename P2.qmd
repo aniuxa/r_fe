@@ -1,0 +1,271 @@
+---
+title: "Importación de conjuntos de datos"
+---
+
+## Consejo para escribir "código""
+
+En general, cuando hacemos nuestro código querremos verificar que nuestras librerías estén instaladas. Si actualizamos nuestro R y Rstudio es probable que hayamos perdido alguno.
+
+Este es un ejemplo de un código. Y vamos a introducir un paquete muy útil llamado `{pacman}`
+
+```{r}
+if (!require("pacman")) install.packages("pacman") # instala pacman si se requiere
+pacman::p_load(tidyverse, 
+               readxl,writexl,googlesheets4, # importar hojas de cálculo
+               haven, foreign, # importación de dta y sab
+               sjlabelled, # etiquetas
+               janitor, skimr, #carga los paquetes necesarios para esta práctica
+               curl) # para que lea urls 
+
+```
+
+## Vamos a trabajar con el proyecto
+
+Descarguemos algunos ejemplos de información, [aquí](https://www.dropbox.com/scl/fo/723ejf136k3u1eu61ndot/ALHu8XydO4r8OP2UawGlx0Y?rlkey=ao0k3y1fy8sfrvga2no5666hk&dl=0) un par de ejemplo de algunos formatos.
+
+## Importación de datos
+
+### Desde Excel
+
+El paquete más compatible con RStudio es readxl. A veces, otros paquetes tienen más problemas de configuración entre R y el Java.
+
+```{r 3}
+ejemploxl <- readxl::read_excel("datos/ejemplo_xlsx.xlsx", sheet = "para_importar")
+
+```
+
+Como el nombre de paquete lo indica, sólo lee. Para escribir en este formato, recomiendo el paquete "writexl". Lo instalamos anteriormente.
+
+Si quisiéramos exportar un objeto a Excel
+
+```{r 5}
+writexl::write_xlsx(ejemploxl, path = "Mi_Exportación.xlsx")
+```
+
+### Desde STATA y SPSS
+
+Si bien también se puede realizar desde el paquete `{foreign}`. Pero este no importa algunas características como las etiquetas y tampoco funciona con las versiones más nuevas de STATA. Vamos a instalar otro paquete, compatible con el mundo tidyverse.
+
+Recuerda que no hay que instalarlo (viene adentro de tidyverse).
+
+```{r}
+concentradohogar <- haven::read_dta("datos/concentradohogar.dta")
+```
+
+!Importante, a R no le gustan los objetos con nombres que empiezan en números
+
+El paquete haven sí exporta información.
+
+```{r}
+haven::write_dta(concentradohogar, "datos/mi_exportacion.dta", version = 12)
+```
+
+Con SSPS es muy parecido. Dentro de "haven" hay una función específica para ello.
+
+```{r}
+ingresos<- haven::read_sav("datos/ingresos.sav")
+
+```
+
+Para escribir
+
+```{r}
+#haven::write_sav(concentradohogar , "mi_exportacion.sav")
+```
+
+Checa que en todas las exportaciones en los nombres hay que incluir la extensión del programa. Si quieres guardar en un lugar diferente al directorio del trabajo, hay que escribir toda la ruta dentro de la computadora.
+
+## Desde `.dbf`
+`{foreing}` nos permite leer archivos en formato de *dBase*, con
+extensión ".dbf". Si bien no es un formato muy común para los
+investigadores, sí para los que generan la información, puesto que dBase
+es uno de los principales programas de administración de bases de datos.
+
+He puesto un ejemplo de una base de datos mexicana en dbf, en este
+formato.
+
+```{r}
+ejemplo_dbf<-foreign::read.dbf("datos/ejemplo_dbf.DBF") #checa cómo nos vamos adentro de nuestro directorio
+```
+
+
+## Revisión de nuestro data.frame
+
+Vamos a revisar la data.frame, 
+
+```{r}
+class(concentradohogar) # tipo de objeto
+names(concentradohogar) # lista las variables
+head(concentradohogar) # muestra las primeras 6 líneas
+table(concentradohogar$clase_hog) # un tabulado simple
+```
+
+## Revisión con dplyr
+
+Operador de "pipe" o "tubería" %\>% (Ctrl+Shift+M) Antes de continuar, presentemos el operador "pipe" %\>%. dplyr importa este operador de otro paquete (magrittr). Este operador le permite canalizar la salida de una función a la entrada de otra función. En lugar de funciones de anidamiento (lectura desde adentro hacia afuera), la idea de la tubería es leer las funciones de izquierda a derecha.
+
+```{r}
+concentradohogar %>% 
+    dplyr::select(sexo_jefe, edad_jefe) %>% 
+    head
+```
+
+```{r}
+concentradohogar %>% 
+    dplyr::select(sexo_jefe, edad_jefe) %>% 
+    glimpse
+```
+
+## Etiquetas y cómo usarlas
+
+Podemos ver que los objetos "data.frame"(*spoiler*, ya hablaremos de ellos)
+
+```{r}
+
+class(concentradohogar$sexo_jefe)
+
+```
+
+### Ejemplo de etiquetado
+
+Para que se vea mejor nuestro tabulado, sería bueno que nuestras variables tuvieran etiqueta. Para ello utilizaremos el paquete "sjlabelled"
+
+```{r}
+etiqueta_sex<-c("Hombre", "Mujer")
+
+concentradohogar<-concentradohogar %>% 
+  mutate(sexo_jefe=as_numeric(sexo_jefe)) %>% # para quitar el "string"
+  sjlabelled::set_labels(sexo_jefe, labels=etiqueta_sex) 
+
+```
+
+Etiquetemos también la variable "clase_hog". Podemos checar cómo está estructurada esta base acá <https://www.inegi.org.mx/rnm/index.php/catalog/685/data-dictionary>
+
+```{r}
+
+concentradohogar<-concentradohogar %>% 
+  mutate(clase_hog=as_numeric(clase_hog)) %>% # para quitar el "string"
+  sjlabelled::set_labels(clase_hog, labels=c("unipersonal",
+                                             "nuclear", 
+                                             "ampliado",
+                                             "compuesto",
+                                             "corresidente")) 
+
+```
+
+```{r}
+table(concentradohogar$sexo_jefe)
+table(sjlabelled::as_label(concentradohogar$sexo_jefe))
+
+```
+
+### Ojeando
+
+```{r}
+dplyr::glimpse(concentradohogar)
+dplyr::glimpse(concentradohogar[,20:30]) # en corchete del lado derecho podemos ojear columnas 
+
+```
+
+Podemos hacer un tipo "labelbook", usando una función que viene de la librería `{sjlabelled}`, `get_labels()`. Funciona para toda la base o para columnas, o para variables.
+
+```{r}
+#print(sjlabelled::get_labels(concentradohogar)) #todas
+print(sjlabelled::get_labels(concentradohogar[, 20:30])) #de las segundas 10 variables
+```
+
+No tienen :(
+
+En singular nos da las etiquetas de las variables, no de los valores:
+
+```{r}
+#print(get_label(concentradohogar)) #todas
+print(get_label(concentradohogar[, 1:10])) #de las primeras 10 variables
+print(get_label(concentradohogar$clase_hog)) #
+```
+
+### Revisión con `{skimr}`
+
+```{r}
+skimr::skim(concentradohogar)
+```
+
+### Selección de casos y de variables
+
+Poco a poco vamos comprendiendo más la lógica de R. Hay varias "formas" de programar. Por lo que no te asustes si varios códigos llegan al mismo resultado
+
+Para revisar el contenido de un data frame podemos usar, como lo hicimos anteriormente, el formato dataframe\$var o usar corchete, checa como estas cuatro formas tan el mismo resultado.
+
+```{r}
+x<-concentradohogar$ing_cor
+x<-concentradohogar[["ing_cor"]]  # ¡Ojo con las comillas! 
+x<-concentradohogar[,23]
+x<-concentradohogar[,"ing_cor"]
+
+```
+
+Ahora, con el formato de dplyr podemos llegar a lo mismo
+
+```{r}
+x<-concentradohogar %>% 
+  select(ing_cor)
+```
+
+## "Subsetting"
+
+Selección "inversa" O sea no "botar algo", es con el negativo. No funciona con todos los formatos
+
+```{r}
+x<-concentradohogar %>% 
+  select(-ing_cor)
+
+rm(x) #rm sólo bota objetos
+```
+
+Pero con los otros formatos podemos "asignar" valores adentro de un data.frame, y uno de eso valores puede ser "la nada""
+
+```{r}
+concentradohogar$ing_cor2<-concentradohogar$ing_cor
+concentradohogar$ing_cor2<-NULL
+
+```
+
+De aquí viene esa cuesta en el aprendizaje; tenemos que comprender en qué forma programó el que hizo la librería e incluso a veces cómo aprendió quién te está enseñando o el foro que estás leyendo.
+
+Rara vez utilizamos una base de datos completa, y rara vez queremos hacer operaciones completas con ellas.
+
+Vamos a pedir cosas más específicas y podemos seleccionar observaciones o filas. Como nuestra base de datos es muy grande, guardaremos el filtro o selección en un objeto.
+
+```{r}
+subset1<-concentradohogar[concentradohogar$ing_cor>5000,]
+```
+
+También podemos seleccionar columnas
+
+```{r}
+subset2<- concentradohogar[, c("sexo_jefe", "edad_jefe", "ing_cor")]
+```
+
+podemos combinar los dos tipos de selección
+
+```{r}
+subset3<- concentradohogar[(concentradohogar$ing_cor>5000 & concentradohogar$sexo_jefe==1 ), c("sexo_jefe", "edad_jefe", "ing_cor")]
+```
+
+Con dplyr, podemos usar "filter" y "select"
+
+```{r}
+
+subset4<-concentradohogar %>% 
+  dplyr::filter(ing_cor>5000 & sexo_jefe==1) %>%
+  dplyr::select(sexo_jefe, edad_jefe, ing_cor)
+```
+
+# Ejercicio
+
+-   Escoja una base con la que usted esté trabajando. Impórtela
+-   Replique la exploración de la práctica: incluya limpiar nombre, alguna revisión global y, opcionalmente, alguna selección de variables o casos de acuerdo a su interés
+-   Utilice al menos un comando con `{dplyr}` para revisar algo
+-   Adjunte un archivo con información de la base (para que yo verifique su importación.), así como el código en .R
+
+Envíe el script utilizado al  [formulario](https://forms.gle/57v5MZoLe4xo7gXe7)

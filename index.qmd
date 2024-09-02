@@ -1,10 +1,13 @@
-# Entrenamiento de R {.unnumbered}
-
-Vamos a tener un Liga de R
+## Entrenamiento de R {.unnumbered}
 
 
-# Facilitadora {.unnumbered}
+### Datos utilizados y proyecto 
 
-## Ana Ruth Escoto Castillo
+Lo puedes descargar de [acá](https://www.dropbox.com/scl/fo/ybjc9krmm134oiauokxbd/ANcz8i3MbjzV9gzKSAToXVg?rlkey=rrzi4qjwpmxoydgq8omw9mcht&dl=0) 
+
+
+## Facilitadora {.unnumbered}
+
+### Ana Ruth Escoto Castillo
 
 Profesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado.
