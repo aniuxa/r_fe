@@ -1,17 +1,17 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "index.html#entrenamiento-de-r",
+    "href": "index.html#entrenamiento-de-r",
     "title": "Entrenamiento de R",
-    "section": "",
-    "text": "Entrenamiento de R\nVamos a tener un Liga de R"
+    "section": "Entrenamiento de R",
+    "text": "Entrenamiento de R\n\nDatos utilizados y proyecto\nLo puedes descargar de acá"
   },
   {
-    "objectID": "index.html#ana-ruth-escoto-castillo",
-    "href": "index.html#ana-ruth-escoto-castillo",
+    "objectID": "index.html#facilitadora",
+    "href": "index.html#facilitadora",
     "title": "Entrenamiento de R",
-    "section": "Ana Ruth Escoto Castillo",
-    "text": "Ana Ruth Escoto Castillo\nProfesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado."
+    "section": "Facilitadora",
+    "text": "Facilitadora\n\nAna Ruth Escoto Castillo\nProfesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado."
   },
   {
     "objectID": "instala.html#introducción-a-r",
@@ -102,14 +102,14 @@
     "href": "P1.html#mi-ambiente",
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.9 Mi ambiente",
-    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"         \"m\"            \"mi_dataframe\" \"mi_matrix\"    \"milista\"     \n [6] \"n\"            \"sex\"          \"vector\"       \"x\"            \"xx\"          \n[11] \"y\"            \"yy\"          \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  638773 34.2    1344187 71.8         NA  1344187 71.8\nVcells 1195987  9.2    8388608 64.0      16384  2160962 16.5\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
+    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"         \"m\"            \"mi_dataframe\" \"mi_matrix\"    \"milista\"     \n [6] \"n\"            \"sex\"          \"vector\"       \"x\"            \"xx\"          \n[11] \"y\"            \"yy\"          \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  638783 34.2    1344212 71.8         NA  1344212 71.8\nVcells 1196030  9.2    8388608 64.0      16384  2161020 16.5\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
   },
   {
     "objectID": "P1.html#directorio-de-trabajo",
     "href": "P1.html#directorio-de-trabajo",
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.10 Directorio de trabajo",
-    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/r_fe\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"LICENSE\"             \"Mi_Exportación.xlsx\" \"P1.qmd\"             \n [4] \"P1.rmarkdown\"        \"P2.qmd\"              \"README.md\"          \n [7] \"_quarto.yml\"         \"datos\"               \"docs\"               \n[10] \"index.html\"          \"index.qmd\"           \"instala.html\"       \n[13] \"instala.qmd\"         \"r_fe.Rproj\"          \"r_fe3\"              \n[16] \"site_libs\"          \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
+    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/r_fe\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"LICENSE\"             \"Mi_Exportación.xlsx\" \"P1.qmd\"             \n [4] \"P1.rmarkdown\"        \"P2.qmd\"              \"README.md\"          \n [7] \"_quarto.yml\"         \"datos\"               \"docs\"               \n[10] \"index.html\"          \"index.qmd\"           \"instala.html\"       \n[13] \"instala.qmd\"         \"r_fe.Rproj\"          \"r_fe3\"              \n[16] \"site_libs\"           \"videos.qmd\"         \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
   },
   {
     "objectID": "P1.html#proyectos",
@@ -210,17 +210,10 @@
     "text": "2.8 “Subsetting”\nSelección “inversa” O sea no “botar algo”, es con el negativo. No funciona con todos los formatos\n\nx<-concentradohogar %>% \n  select(-ing_cor)\n\nrm(x) #rm sólo bota objetos\n\nPero con los otros formatos podemos “asignar” valores adentro de un data.frame, y uno de eso valores puede ser “la nada””\n\nconcentradohogar$ing_cor2<-concentradohogar$ing_cor\nconcentradohogar$ing_cor2<-NULL\n\nDe aquí viene esa cuesta en el aprendizaje; tenemos que comprender en qué forma programó el que hizo la librería e incluso a veces cómo aprendió quién te está enseñando o el foro que estás leyendo.\nRara vez utilizamos una base de datos completa, y rara vez queremos hacer operaciones completas con ellas.\nVamos a pedir cosas más específicas y podemos seleccionar observaciones o filas. Como nuestra base de datos es muy grande, guardaremos el filtro o selección en un objeto.\n\nsubset1<-concentradohogar[concentradohogar$ing_cor>5000,]\n\nTambién podemos seleccionar columnas\n\nsubset2<- concentradohogar[, c(\"sexo_jefe\", \"edad_jefe\", \"ing_cor\")]\n\npodemos combinar los dos tipos de selección\n\nsubset3<- concentradohogar[(concentradohogar$ing_cor>5000 & concentradohogar$sexo_jefe==1 ), c(\"sexo_jefe\", \"edad_jefe\", \"ing_cor\")]\n\nCon dplyr, podemos usar “filter” y “select”\n\nsubset4<-concentradohogar %>% \n  dplyr::filter(ing_cor>5000 & sexo_jefe==1) %>%\n  dplyr::select(sexo_jefe, edad_jefe, ing_cor)"
   },
   {
-    "objectID": "index.html#entrenamiento-de-r",
-    "href": "index.html#entrenamiento-de-r",
-    "title": "Entrenamiento de R",
-    "section": "Entrenamiento de R",
-    "text": "Entrenamiento de R\n\nDatos utilizados y proyecto\nLo puedes descargar de acá"
-  },
-  {
-    "objectID": "index.html#facilitadora",
-    "href": "index.html#facilitadora",
-    "title": "Entrenamiento de R",
-    "section": "Facilitadora",
-    "text": "Facilitadora\n\nAna Ruth Escoto Castillo\nProfesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado."
+    "objectID": "videos.html#sesión-2-de-septiembre-2024",
+    "href": "videos.html#sesión-2-de-septiembre-2024",
+    "title": "Videos y extras",
+    "section": "Sesión 2 de septiembre 2024",
+    "text": "Sesión 2 de septiembre 2024"
   }
 ]

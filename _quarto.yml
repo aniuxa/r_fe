@@ -6,8 +6,8 @@ book:
   title: "Entrenamiento de R"
   author: "Ana Escoto"
   date: "08/19/2024"
-  site-url: https://fcpys.github.io/r_fe/
-  repo-url: https://github.com/fcpys/r_fe/
+  site-url: https://aniuxa.github.io/r_fe/
+  repo-url: https://github.com/aniuxa/r_fe/
   repo-branch: main
   repo-actions: [edit, issue]  
   chapters:
@@ -15,6 +15,7 @@ book:
     - instala.qmd
     - P1.qmd
     - P2.qmd
+    - videos.qmd
 
 
 format:
