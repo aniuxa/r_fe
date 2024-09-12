@@ -5,3 +5,11 @@
 
 {{< video https://youtu.be/JpYLNLJhB7w >}}
 
+## Sesión 9 de septiembre 2024
+
+{{< video  https://youtu.be/GVweYENQOS8 >}}
+
+
+## Cheatsheets
+
+[`{dplyr}`](https://rstudio.github.io/cheatsheets/translations/spanish/data-transformation_es.pdf)
