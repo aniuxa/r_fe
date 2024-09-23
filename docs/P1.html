@@ -184,6 +184,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./P3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./videos.html" class="sidebar-item-text sidebar-link">Videos y extras</a>
   </div>
 </li>
@@ -624,8 +629,8 @@ sum&gt; sum(1:5, NA, na.rm = TRUE)
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()           <span class="co"># Garbage collection, reporta memoria en uso</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  638783 34.2    1344212 71.8         NA  1344212 71.8
-Vcells 1196030  9.2    8388608 64.0      16384  2161020 16.5</code></pre>
+Ncells  638825 34.2    1344350 71.8         NA  1344350 71.8
+Vcells 1196119  9.2    8388608 64.0      16384  2161133 16.5</code></pre>
 </div>
 </div>
 <p>Para borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment</p>
@@ -646,12 +651,30 @@ Vcells 1196030  9.2    8388608 64.0      16384  2161020 16.5</code></pre>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()      <span class="co"># Lista de archivos en ese directorio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "LICENSE"             "Mi_Exportación.xlsx" "P1.qmd"             
- [4] "P1.rmarkdown"        "P2.qmd"              "README.md"          
- [7] "_quarto.yml"         "datos"               "docs"               
-[10] "index.html"          "index.qmd"           "instala.html"       
-[13] "instala.qmd"         "r_fe.Rproj"          "r_fe3"              
-[16] "site_libs"           "videos.qmd"         </code></pre>
+<pre><code> [1] "EDA.R"                                                      
+ [2] "LICENSE"                                                    
+ [3] "Mi_Exportación.xlsx"                                        
+ [4] "P1.qmd"                                                     
+ [5] "P1.rmarkdown"                                               
+ [6] "P2.qmd"                                                     
+ [7] "P3.qmd"                                                     
+ [8] "README.md"                                                  
+ [9] "_quarto.yml"                                                
+[10] "dataMaid_dplyr__select_ejemplo_csv__starts_with__P4___.Rmd" 
+[11] "dataMaid_dplyr__select_ejemplo_csv__starts_with__P4___.html"
+[12] "dataMaid_ejemplo_csv.Rmd"                                   
+[13] "dataMaid_ejemplo_csv.html"                                  
+[14] "datos"                                                      
+[15] "docs"                                                       
+[16] "index.html"                                                 
+[17] "index.qmd"                                                  
+[18] "instala.html"                                               
+[19] "instala.qmd"                                                
+[20] "r_fe.Rproj"                                                 
+[21] "r_fe3"                                                      
+[22] "report.html"                                                
+[23] "site_libs"                                                  
+[24] "videos.qmd"                                                 </code></pre>
 </div>
 </div>
 <p>Checar que esto también se puede hacer desde el menú:</p>
