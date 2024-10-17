@@ -2,9 +2,7 @@
 title: "Análisis descriptivo"
 ---
 
-
 ## Paquetes
-
 
 ```{r}
 if (!require("pacman")) install.packages("pacman") # instala pacman si se requiere
@@ -22,7 +20,6 @@ pacman::p_load(tidyverse,
 ```{r}
 concentradohogar <- haven::read_dta("datos/concentradohogar.dta")
 ```
-
 
 ## Etiquetas y cómo usarlas
 
@@ -66,8 +63,6 @@ table(concentradohogar$sexo_jefe)
 table(sjlabelled::as_label(concentradohogar$sexo_jefe))
 
 ```
-
-
 
 ## Variables nominales
 
@@ -182,7 +177,6 @@ concentradohogar <-concentradohogar %>%
                       "Profesional completa",
                       "Posgrado"))
 ```
-
 
 Hoy hacemos la tabla, con las etiquetas y vemos que se ve más bonita:
 
