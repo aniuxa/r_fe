@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Entrenamiento de R - 6&nbsp; Repaso: revisión de data drames</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./videos.html" rel="next">
+<link href="./P5.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./P6.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repaso: revisión de data drames</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Entrenamiento de R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/aniuxa/r_fe/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Entrenamiento de R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./instala.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instalación de R y Rstudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API INEGI y Banxico</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regresión lineal - intro</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repaso: revisión de data drames</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./videos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Videos y extras</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#paquetes" id="toc-paquetes" class="nav-link active" data-scroll-target="#paquetes"><span class="header-section-number">6.1</span> Paquetes</a></li>
+  <li><a href="#datos" id="toc-datos" class="nav-link" data-scroll-target="#datos"><span class="header-section-number">6.2</span> Datos</a></li>
+  <li><a href="#repaso-revisión" id="toc-repaso-revisión" class="nav-link" data-scroll-target="#repaso-revisión"><span class="header-section-number">7</span> Repaso revisión</a></li>
+  <li><a href="#análisis-univariado" id="toc-análisis-univariado" class="nav-link" data-scroll-target="#análisis-univariado"><span class="header-section-number">8</span> Análisis univariado</a>
+  <ul class="collapse">
+  <li><a href="#una-variable-cuanti" id="toc-una-variable-cuanti" class="nav-link" data-scroll-target="#una-variable-cuanti"><span class="header-section-number">8.1</span> Una variable cuanti</a>
+  <ul class="collapse">
+  <li><a href="#medidas-numéricas" id="toc-medidas-numéricas" class="nav-link" data-scroll-target="#medidas-numéricas"><span class="header-section-number">8.1.1</span> Medidas numéricas</a></li>
+  <li><a href="#gráficos" id="toc-gráficos" class="nav-link" data-scroll-target="#gráficos"><span class="header-section-number">8.1.2</span> Gráficos</a></li>
+  </ul></li>
+  <li><a href="#una-variable-cuali" id="toc-una-variable-cuali" class="nav-link" data-scroll-target="#una-variable-cuali"><span class="header-section-number">8.2</span> Una variable cuali</a>
+  <ul class="collapse">
+  <li><a href="#tabla-de-frecuencia" id="toc-tabla-de-frecuencia" class="nav-link" data-scroll-target="#tabla-de-frecuencia"><span class="header-section-number">8.2.1</span> tabla de frecuencia</a></li>
+  <li><a href="#gráfico-de-barras" id="toc-gráfico-de-barras" class="nav-link" data-scroll-target="#gráfico-de-barras"><span class="header-section-number">8.2.2</span> Gráfico de barras</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#análisis-bivariado" id="toc-análisis-bivariado" class="nav-link" data-scroll-target="#análisis-bivariado"><span class="header-section-number">9</span> Análisis bivariado</a>
+  <ul class="collapse">
+  <li><a href="#cuanti---cuali" id="toc-cuanti---cuali" class="nav-link" data-scroll-target="#cuanti---cuali"><span class="header-section-number">9.1</span> Cuanti - cuali</a>
+  <ul class="collapse">
+  <li><a href="#medidas-numéricas-1" id="toc-medidas-numéricas-1" class="nav-link" data-scroll-target="#medidas-numéricas-1"><span class="header-section-number">9.1.1</span> Medidas numéricas</a></li>
+  <li><a href="#gráficas" id="toc-gráficas" class="nav-link" data-scroll-target="#gráficas"><span class="header-section-number">9.1.2</span> Gráficas</a></li>
+  </ul></li>
+  <li><a href="#uso-de-colores" id="toc-uso-de-colores" class="nav-link" data-scroll-target="#uso-de-colores"><span class="header-section-number">9.2</span> Uso de colores</a></li>
+  <li><a href="#ggally" id="toc-ggally" class="nav-link" data-scroll-target="#ggally"><span class="header-section-number">9.3</span> GGally</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/aniuxa/r_fe/edit/main/P6.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/aniuxa/r_fe/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repaso: revisión de data drames</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="paquetes" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="paquetes"><span class="header-section-number">6.1</span> Paquetes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: pacman</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               haven, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               sjlabelled,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               ggthemes,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               broom, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               janitor,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>               jtools, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               sjPlot,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>               car, </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>               performance, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>               GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="datos" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="datos"><span class="header-section-number">6.2</span> Datos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#concentradohogar &lt;- haven::read_dta("datos/concentradohogar.dta", encoding = "latin1") # si hay problemas de encoding</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"datos/concentradohogar.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="repaso-revisión" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Repaso revisión</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 126
+  folioviv   foliohog ubica_geo tam_loc est_socio est_dis upm   factor clase_hog
+  &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    
+1 0100005002 1        01001     1       4         003     0000…    206 3        
+2 0100005003 1        01001     1       4         003     0000…    206 2        
+3 0100005004 1        01001     1       4         003     0000…    206 2        
+4 0100012002 1        01001     1       3         002     0000…    167 3        
+5 0100012002 2        01001     1       3         002     0000…    167 1        
+6 0100012004 1        01001     1       3         002     0000…    167 2        
+# ℹ 117 more variables: sexo_jefe &lt;chr&gt;, edad_jefe &lt;dbl&gt;, educa_jefe &lt;chr&gt;,
+#   tot_integ &lt;dbl&gt;, hombres &lt;dbl&gt;, mujeres &lt;dbl&gt;, mayores &lt;dbl&gt;,
+#   menores &lt;dbl&gt;, p12_64 &lt;dbl&gt;, p65mas &lt;dbl&gt;, ocupados &lt;dbl&gt;,
+#   percep_ing &lt;dbl&gt;, perc_ocupa &lt;dbl&gt;, ing_cor &lt;dbl&gt;, ingtrab &lt;dbl&gt;,
+#   trabajo &lt;dbl&gt;, sueldos &lt;dbl&gt;, horas_extr &lt;dbl&gt;, comisiones &lt;dbl&gt;,
+#   aguinaldo &lt;dbl&gt;, indemtrab &lt;dbl&gt;, otra_rem &lt;dbl&gt;, remu_espec &lt;dbl&gt;,
+#   negocio &lt;dbl&gt;, noagrop &lt;dbl&gt;, industria &lt;dbl&gt;, comercio &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentradohogar) <span class="do">## revisar contra la documentación de la base</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "folioviv"   "foliohog"   "ubica_geo"  "tam_loc"    "est_socio" 
+  [6] "est_dis"    "upm"        "factor"     "clase_hog"  "sexo_jefe" 
+ [11] "edad_jefe"  "educa_jefe" "tot_integ"  "hombres"    "mujeres"   
+ [16] "mayores"    "menores"    "p12_64"     "p65mas"     "ocupados"  
+ [21] "percep_ing" "perc_ocupa" "ing_cor"    "ingtrab"    "trabajo"   
+ [26] "sueldos"    "horas_extr" "comisiones" "aguinaldo"  "indemtrab" 
+ [31] "otra_rem"   "remu_espec" "negocio"    "noagrop"    "industria" 
+ [36] "comercio"   "servicios"  "agrope"     "agricolas"  "pecuarios" 
+ [41] "reproducc"  "pesca"      "otros_trab" "rentas"     "utilidad"  
+ [46] "arrenda"    "transfer"   "jubilacion" "becas"      "donativos" 
+ [51] "remesas"    "bene_gob"   "transf_hog" "trans_inst" "estim_alqu"
+ [56] "otros_ing"  "gasto_mon"  "alimentos"  "ali_dentro" "cereales"  
+ [61] "carnes"     "pescado"    "leche"      "huevo"      "aceites"   
+ [66] "tuberculo"  "verduras"   "frutas"     "azucar"     "cafe"      
+ [71] "especias"   "otros_alim" "bebidas"    "ali_fuera"  "tabaco"    
+ [76] "vesti_calz" "vestido"    "calzado"    "vivienda"   "alquiler"  
+ [81] "pred_cons"  "agua"       "energia"    "limpieza"   "cuidados"  
+ [86] "utensilios" "enseres"    "salud"      "atenc_ambu" "hospital"  
+ [91] "medicinas"  "transporte" "publico"    "foraneo"    "adqui_vehi"
+ [96] "mantenim"   "refaccion"  "combus"     "comunica"   "educa_espa"
+[101] "educacion"  "esparci"    "paq_turist" "personales" "cuida_pers"
+[106] "acces_pers" "otros_gas"  "transf_gas" "percep_tot" "retiro_inv"
+[111] "prestamos"  "otras_perc" "ero_nm_viv" "ero_nm_hog" "erogac_tot"
+[116] "cuota_viv"  "mater_serv" "material"   "servicio"   "deposito"  
+[121] "prest_terc" "pago_tarje" "deudas"     "balance"    "otras_erog"
+[126] "smg"       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 90,102
+Columns: 126
+$ folioviv   &lt;chr&gt; "0100005002", "0100005003", "0100005004", "0100012002", "01…
+$ foliohog   &lt;chr&gt; "1", "1", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1",…
+$ ubica_geo  &lt;chr&gt; "01001", "01001", "01001", "01001", "01001", "01001", "0100…
+$ tam_loc    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",…
+$ est_socio  &lt;chr&gt; "4", "4", "4", "3", "3", "3", "3", "4", "4", "4", "4", "3",…
+$ est_dis    &lt;chr&gt; "003", "003", "003", "002", "002", "002", "002", "003", "00…
+$ upm        &lt;chr&gt; "0000001", "0000001", "0000001", "0000002", "0000002", "000…
+$ factor     &lt;dbl&gt; 206, 206, 206, 167, 167, 167, 167, 212, 212, 212, 212, 184,…
+$ clase_hog  &lt;chr&gt; "3", "2", "2", "3", "1", "2", "2", "1", "2", "2", "2", "1",…
+$ sexo_jefe  &lt;chr&gt; "2", "1", "1", "1", "1", "1", "2", "2", "2", "1", "1", "1",…
+$ edad_jefe  &lt;dbl&gt; 91, 68, 56, 87, 27, 57, 47, 75, 70, 69, 48, 73, 64, 55, 58,…
+$ educa_jefe &lt;chr&gt; "03", "08", "10", "11", "08", "08", "10", "06", "10", "04",…
+$ tot_integ  &lt;dbl&gt; 3, 2, 3, 4, 1, 4, 4, 1, 3, 2, 5, 1, 4, 3, 1, 6, 4, 2, 3, 1,…
+$ hombres    &lt;dbl&gt; 0, 1, 2, 2, 1, 2, 2, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 3, 0,…
+$ mujeres    &lt;dbl&gt; 3, 1, 1, 2, 0, 2, 2, 1, 2, 1, 4, 0, 3, 2, 1, 5, 3, 1, 0, 1,…
+$ mayores    &lt;dbl&gt; 3, 2, 3, 4, 1, 3, 4, 1, 3, 2, 5, 1, 4, 2, 1, 4, 4, 2, 1, 1,…
+$ menores    &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 2, 0,…
+$ p12_64     &lt;dbl&gt; 2, 1, 3, 2, 1, 3, 4, 0, 2, 0, 5, 0, 4, 2, 1, 4, 3, 0, 1, 1,…
+$ p65mas     &lt;dbl&gt; 1, 1, 0, 2, 0, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 2, 0, 0,…
+$ ocupados   &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
+$ percep_ing &lt;dbl&gt; 3, 2, 2, 2, 1, 4, 2, 1, 3, 2, 1, 1, 2, 2, 1, 3, 2, 2, 1, 1,…
+$ perc_ocupa &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
+$ ing_cor    &lt;dbl&gt; 56123.75, 108048.87, 133852.88, 105054.15, 24211.95, 121649…
+$ ingtrab    &lt;dbl&gt; 35706.51, 66766.28, 93081.50, 0.00, 22255.43, 40255.41, 333…
+$ trabajo    &lt;dbl&gt; 35706.51, 66766.28, 51603.24, 0.00, 17364.13, 40255.41, 327…
+$ sueldos    &lt;dbl&gt; 33749.99, 61630.42, 41086.95, 0.00, 17364.13, 36586.94, 246…
+$ horas_extr &lt;dbl&gt; 0.00, 0.00, 978.26, 0.00, 0.00, 0.00, 7092.39, 0.00, 0.00, …
+$ comisiones &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ aguinaldo  &lt;dbl&gt; 1956.52, 4646.73, 5135.86, 0.00, 0.00, 3668.47, 1027.17, 0.…
+$ indemtrab  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ otra_rem   &lt;dbl&gt; 0.00, 489.13, 4402.17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, …
+$ remu_espec &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ negocio    &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ noagrop    &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ industria  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ comercio   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ servicios  &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ agrope     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ agricolas  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ pecuarios  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ reproducc  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ pesca      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ otros_trab &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 4891.30, 0.00, 586.95, 0.00, 0.00, …
+$ rentas     &lt;dbl&gt; 0.00, 32282.60, 11739.13, 0.00, 0.00, 72684.78, 0.00, 0.00,…
+$ utilidad   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 72684.78, 0.00, 0.00, 16007.2…
+$ arrenda    &lt;dbl&gt; 0.00, 32282.60, 11739.13, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ transfer   &lt;dbl&gt; 8804.34, 8999.99, 0.00, 90538.03, 1956.52, 0.00, 26902.17, …
+$ jubilacion &lt;dbl&gt; 0.00, 0.00, 0.00, 79239.13, 0.00, 0.00, 0.00, 73369.56, 440…
+$ becas      &lt;dbl&gt; 391.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.…
+$ donativos  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1956.52, 0.00, 26902.17, 0.00, 0.00…
+$ remesas    &lt;dbl&gt; 978.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ bene_gob   &lt;dbl&gt; 7434.78, 0.00, 0.00, 11298.90, 0.00, 0.00, 0.00, 5649.45, 0…
+$ transf_hog &lt;dbl&gt; 0.00, 8999.99, 0.00, 0.00, 0.00, 0.00, 0.00, 2442.84, 0.00,…
+$ trans_inst &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ estim_alqu &lt;dbl&gt; 11612.90, 0.00, 29032.25, 14516.12, 0.00, 8709.67, 0.00, 14…
+$ otros_ing  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ gasto_mon  &lt;dbl&gt; 35091.17, 78670.73, 101647.27, 46702.31, 26927.85, 51176.07…
+$ alimentos  &lt;dbl&gt; 9514.19, 17524.25, 18321.36, 14759.90, 12458.47, 6351.40, 1…
+$ ali_dentro &lt;dbl&gt; 6814.20, 5181.41, 16907.08, 6274.20, 7315.63, 951.42, 11828…
+$ cereales   &lt;dbl&gt; 1465.70, 231.42, 1362.84, 1928.53, 308.56, 617.14, 1915.67,…
+$ carnes     &lt;dbl&gt; 617.14, 4114.28, 5142.85, 1928.57, 2442.84, 0.00, 6685.69, …
+$ pescado    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1799.99, 0.00, 1414.28, 0.00, 0.00,…
+$ leche      &lt;dbl&gt; 269.99, 578.57, 0.00, 1414.26, 0.00, 334.28, 0.00, 565.70, …
+$ huevo      &lt;dbl&gt; 0.00, 257.14, 1028.57, 0.00, 321.42, 0.00, 0.00, 0.00, 1002…
+$ aceites    &lt;dbl&gt; 0.00, 0.00, 565.71, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ tuberculo  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1028.56, 0.00, 321.42, 621.38, 0.00…
+$ verduras   &lt;dbl&gt; 2288.53, 0.00, 1735.69, 1002.84, 642.85, 0.00, 951.41, 2069…
+$ frutas     &lt;dbl&gt; 1954.27, 0.00, 0.00, 0.00, 0.00, 0.00, 539.99, 1234.27, 195…
+$ azucar     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ cafe       &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ especias   &lt;dbl&gt; 218.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ otros_alim &lt;dbl&gt; 0.00, 0.00, 5142.85, 0.00, 0.00, 0.00, 0.00, 3857.14, 1928.…
+$ bebidas    &lt;dbl&gt; 0.00, 0.00, 1928.57, 0.00, 771.41, 0.00, 0.00, 462.84, 2378…
+$ ali_fuera  &lt;dbl&gt; 2699.99, 12342.84, 1414.28, 8485.70, 5142.84, 5399.98, 5528…
+$ tabaco     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ vesti_calz &lt;dbl&gt; 2445.64, 684.78, 0.00, 1369.56, 0.00, 1751.06, 9782.60, 489…
+$ vestido    &lt;dbl&gt; 2445.64, 684.78, 0.00, 1369.56, 0.00, 1751.06, 5380.43, 489…
+$ calzado    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 4402.17, 0.00, 0.00, 0.…
+$ vivienda   &lt;dbl&gt; 1736.75, 29649.66, 3232.25, 2850.00, 2700.00, 3660.00, 1822…
+$ alquiler   &lt;dbl&gt; 0.00, 24677.41, 0.00, 0.00, 0.00, 0.00, 13935.48, 0.00, 0.0…
+$ pred_cons  &lt;dbl&gt; 116.75, 2032.25, 2032.25, 150.00, 0.00, 150.00, 0.00, 750.0…
+$ agua       &lt;dbl&gt; 780, 540, 750, 450, 450, 1200, 1410, 420, 840, 420, 900, 87…
+$ energia    &lt;dbl&gt; 840.00, 2400.00, 450.00, 2250.00, 2250.00, 2310.00, 2876.61…
+$ limpieza   &lt;dbl&gt; 2075.80, 2816.11, 1422.55, 1228.04, 890.36, 3518.67, 2386.3…
+$ cuidados   &lt;dbl&gt; 2075.80, 2816.11, 1422.55, 1228.04, 792.54, 3518.67, 2386.3…
+$ utensilios &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 97.82, 0.00, 0.00, 0.00, 489.13, 23…
+$ enseres    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ salud      &lt;dbl&gt; 2641.29, 0.00, 0.00, 0.00, 0.00, 1007.60, 8902.16, 3277.16,…
+$ atenc_ambu &lt;dbl&gt; 2641.29, 0.00, 0.00, 0.00, 0.00, 1007.60, 7923.90, 3277.16,…
+$ hospital   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ medicinas  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 978.26, 0.00, 978.26, 0…
+$ transporte &lt;dbl&gt; 6773.62, 6706.44, 23312.90, 23574.19, 5080.63, 20601.28, 84…
+$ publico    &lt;dbl&gt; 2314.28, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 771.42, 1157.1…
+$ foraneo    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ adqui_vehi &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ mantenim   &lt;dbl&gt; 2903.22, 4354.83, 11612.90, 20322.58, 4064.51, 17709.67, 53…
+$ refaccion  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ combus     &lt;dbl&gt; 2903.22, 4354.83, 11612.90, 20322.58, 4064.51, 17709.67, 53…
+$ comunica   &lt;dbl&gt; 1556.12, 2351.61, 11700.00, 3251.61, 1016.12, 2891.61, 3033…
+$ educa_espa &lt;dbl&gt; 2903.22, 0.00, 34728.25, 0.00, 4209.66, 6967.74, 9058.05, 0…
+$ educacion  &lt;dbl&gt; 2903.22, 0.00, 0.00, 0.00, 0.00, 6967.74, 6735.47, 0.00, 0.…
+$ esparci    &lt;dbl&gt; 0.00, 0.00, 5380.43, 0.00, 4209.66, 0.00, 2322.58, 0.00, 0.…
+$ paq_turist &lt;dbl&gt; 0.00, 0.00, 29347.82, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ personales &lt;dbl&gt; 4097.44, 3870.14, 13416.08, 2920.62, 1344.17, 812.90, 4918.…
+$ cuida_pers &lt;dbl&gt; 673.53, 3745.14, 1916.09, 2920.62, 1344.17, 812.90, 4708.95…
+$ acces_pers &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ otros_gas  &lt;dbl&gt; 3423.91, 125.00, 11499.99, 0.00, 0.00, 0.00, 210.00, 0.00, …
+$ transf_gas &lt;dbl&gt; 2903.22, 17419.35, 7213.88, 0.00, 244.56, 6505.42, 73.36, 4…
+$ percep_tot &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 3214.27, 0.00, 0.00, 0.00, 0.00, 0.…
+$ retiro_inv &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ prestamos  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ otras_perc &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ero_nm_viv &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ero_nm_hog &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 3214.27, 0.00, 0.00, 0.00, 0.00, 0.…
+$ erogac_tot &lt;dbl&gt; 0.00, 19565.21, 0.00, 28124.99, 0.00, 5771.73, 360.97, 2445…
+$ cuota_viv  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ mater_serv &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ material   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ servicio   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ deposito   &lt;dbl&gt; 0.00, 19565.21, 0.00, 28124.99, 0.00, 5771.73, 0.00, 2445.6…
+$ prest_terc &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ pago_tarje &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ deudas     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ balance    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ otras_erog &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 360.97, 0.00, 0.00, 0.0…
+$ smg        &lt;dbl&gt; 15558.3, 15558.3, 15558.3, 15558.3, 15558.3, 15558.3, 15558…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Claridad del tipo de variables</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Naturaleza de la variable vs el almacenamiento</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="análisis-univariado" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Análisis univariado</h1>
+<section id="una-variable-cuanti" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="una-variable-cuanti"><span class="header-section-number">8.1</span> Una variable cuanti</h2>
+<section id="medidas-numéricas" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="medidas-numéricas"><span class="header-section-number">8.1.1</span> Medidas numéricas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ingtrab) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  base<span class="sc">::</span><span class="fu">summary</span>() <span class="co">#con summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    ingtrab       
+ Min.   :      0  
+ 1st Qu.:  12171  
+ Median :  29899  
+ Mean   :  40360  
+ 3rd Qu.:  54328  
+ Max.   :5891914  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">media=</span><span class="fu">mean</span>(ingtrab))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+   media
+   &lt;dbl&gt;
+1 40360.</code></pre>
+</div>
+</div>
+</section>
+<section id="gráficos" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="gráficos"><span class="header-section-number">8.1.2</span> Gráficos</h3>
+<p>histogramas, densidad, boxplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>ingtrab) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(ingtrab)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(ingtrab)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(ingtrab)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_excel_new</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="una-variable-cuali" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="una-variable-cuali"><span class="header-section-number">8.2</span> Una variable cuali</h2>
+<section id="tabla-de-frecuencia" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="tabla-de-frecuencia"><span class="header-section-number">8.2.1</span> tabla de frecuencia</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># en ocasiones hay que etiquetar</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sexo_jefe=</span><span class="fu">as.numeric</span>(sexo_jefe)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  sjlabelled<span class="sc">::</span><span class="fu">set_labels</span>(sexo_jefe, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Hombre"</span>, <span class="st">"Mujer"</span>)) </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexo_jefe=</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">tabyl</span>(sexo_jefe) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> sexo_jefe     n   percent
+    Hombre 61905 0.6870547
+     Mujer 28197 0.3129453
+     Total 90102 1.0000000</code></pre>
+</div>
+</div>
+<p>OJO SI LA VARIABLE ESTA COMO CARACTER NO HAY QUE HACER ESTO, SE PUEDE HACER EL TABULADO DIRECTO</p>
+</section>
+<section id="gráfico-de-barras" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="gráfico-de-barras"><span class="header-section-number">8.2.2</span> Gráfico de barras</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"count"</span>, <span class="at">fill =</span> <span class="st">"#CC6CE7"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_nice</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Revisa los colores acá <a href="https://r-charts.com/es/colores/" class="uri">https://r-charts.com/es/colores/</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"count"</span>, <span class="at">fill =</span> <span class="st">"#CC6CE7"</span>, <span class="at">color =</span> <span class="st">"blue4"</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co">#ojo con esto para las etiquetas</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_nice</span>() <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Frecuencias de hogares según sexo del jefe"</span>, </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Sexo"</span>, </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Número de hogares"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="análisis-bivariado" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Análisis bivariado</h1>
+<section id="cuanti---cuali" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="cuanti---cuali"><span class="header-section-number">9.1</span> Cuanti - cuali</h2>
+<section id="medidas-numéricas-1" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="medidas-numéricas-1"><span class="header-section-number">9.1.1</span> Medidas numéricas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="fu">as_label</span>(sexo_jefe)) <span class="sc">%&gt;%</span> <span class="co"># renglones en mi tabla</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media =</span> <span class="fu">mean</span>(ingtrab, <span class="at">na.rm =</span> T), <span class="co"># quitar los missings no duele</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(ingtrab, <span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  `as_label(sexo_jefe)`  media     sd
+  &lt;fct&gt;                  &lt;dbl&gt;  &lt;dbl&gt;
+1 Hombre                43742. 57010.
+2 Mujer                 32934. 39164.</code></pre>
+</div>
+</div>
+</section>
+<section id="gráficas" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="gráficas"><span class="header-section-number">9.1.2</span> Gráficas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(ingtrab)) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span><span class="fu">as_label</span>(sexo_jefe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(ingtrab), <span class="at">color =</span> sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución ingresos por trabajo"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Según sexo del jefe(a) del hogar"</span>, </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Logaritmos de los ingresos por trabajo (trimestrales)"</span>, </span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Densidad"</span>, </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Fuente: ENIGH 2022 datos no ponderados"</span>, </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ojo en color o fill la variable debe ser factor o caracter, por eso hay que usar el as_label. Si la variable está como caracter se puede poner directo</p>
+</section>
+</section>
+<section id="uso-de-colores" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="uso-de-colores"><span class="header-section-number">9.2</span> Uso de colores</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Uso de paletas de colores</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>RColorBrewer<span class="sc">::</span><span class="fu">display.brewer.all</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(ingtrab), <span class="at">color =</span> sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Accent"</span>, <span class="at">direction =</span> <span class="dv">1</span> )<span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución ingresos por trabajo"</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Según sexo del jefe(a) del hogar"</span>, </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Logaritmos de los ingresos por trabajo (trimestrales)"</span>, </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Densidad"</span>, </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Fuente: ENIGH 2022 datos no ponderados"</span>, </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(ingtrab), <span class="at">color =</span> sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"green"</span>))<span class="sc">+</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución ingresos por trabajo"</span>,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Según sexo del jefe(a) del hogar"</span>, </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Logaritmos de los ingresos por trabajo (trimestrales)"</span>, </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Densidad"</span>, </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Fuente: ENIGH 2022 datos no ponderados"</span>, </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> <span class="fu">last_plot</span>(), </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">"grafico_final.png"</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">500</span>, </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">9</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10749 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+</div>
+<p><code>scale_fill_brewer()</code> y <code>scale_fill_manual()</code> sería para el relleno <code>fill</code>, pero funcionan igual.</p>
+</section>
+<section id="ggally" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="ggally"><span class="header-section-number">9.3</span> GGally</h2>
+<p>Cuando tenemos muchas variables cuanti y queremos ver su relación, aquí hay un atajo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## gg gally</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ing_cor, edad_jefe, gasto_mon, ingtrab) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggpairs</span>() <span class="co"># hoy sí funcionó</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="P6_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./P5.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regresión lineal - intro</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./videos.html" class="pagination-link">
+        <span class="nav-page-text">Videos y extras</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

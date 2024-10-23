@@ -1,0 +1,235 @@
+---
+title: "Repaso: revisión de data drames"
+---
+
+## Paquetes
+
+```{r}
+if(!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, 
+               haven, 
+               sjlabelled,
+               ggthemes,
+               broom, 
+               janitor,
+               jtools, 
+               sjPlot,
+               car, 
+               performance, 
+               GGally)
+
+
+```
+
+## Datos
+
+```{r}
+#concentradohogar <- haven::read_dta("datos/concentradohogar.dta", encoding = "latin1") # si hay problemas de encoding
+concentradohogar <- haven::read_dta("datos/concentradohogar.dta")
+
+```
+# Repaso revisión
+
+```{r}
+head(concentradohogar)
+
+names(concentradohogar) ## revisar contra la documentación de la base
+
+concentradohogar %>% 
+  dplyr::glimpse()
+
+# Claridad del tipo de variables
+# Naturaleza de la variable vs el almacenamiento
+```
+
+# Análisis univariado
+
+## Una variable cuanti
+
+### Medidas numéricas
+
+```{r}
+
+concentradohogar %>% 
+  dplyr::select(ingtrab) %>% 
+  base::summary() #con summary
+
+concentradohogar %>% 
+  dplyr::summarise(media=mean(ingtrab))
+
+```
+
+### Gráficos
+histogramas, densidad, boxplot
+```{r}
+
+concentradohogar %>% 
+  ggplot2::ggplot() +
+  aes(x=ingtrab) +
+  geom_density()
+
+concentradohogar %>% 
+  ggplot2::ggplot() +
+  aes(x=log(ingtrab)) +
+  geom_density()
+
+
+concentradohogar %>% 
+  ggplot2::ggplot() +
+  aes(x=log(ingtrab)) +
+  geom_histogram()
+
+
+concentradohogar %>% 
+  ggplot2::ggplot() +
+  aes(x=log(ingtrab)) +
+  geom_boxplot() +
+  theme_excel_new()
+
+```
+
+## Una variable cuali
+
+### tabla de frecuencia
+
+```{r}
+# en ocasiones hay que etiquetar
+
+concentradohogar<-concentradohogar %>% 
+  dplyr::mutate(sexo_jefe=as.numeric(sexo_jefe)) %>% 
+  sjlabelled::set_labels(sexo_jefe, labels=c("Hombre", "Mujer")) 
+  
+  
+concentradohogar %>% 
+  mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
+  janitor::tabyl(sexo_jefe) %>% 
+  janitor::adorn_totals()
+
+```
+
+ OJO SI LA VARIABLE ESTA COMO CARACTER NO HAY QUE HACER ESTO, SE PUEDE HACER EL TABULADO DIRECTO
+ 
+ 
+### Gráfico de barras
+```{r}
+concentradohogar %>% 
+  ggplot() +
+  aes(x=as_label(sexo_jefe)) +
+  geom_bar(stat="count", fill = "#CC6CE7") +
+  coord_flip() + 
+  theme_nice()
+
+```
+
+Revisa los colores acá <https://r-charts.com/es/colores/>
+```{r}
+concentradohogar %>% 
+  ggplot() +
+  aes(x=as_label(sexo_jefe)) +
+  geom_bar(stat="count", fill = "#CC6CE7", color = "blue4") +
+  coord_flip() + #ojo con esto para las etiquetas
+  theme_nice() +
+  labs(title = "Frecuencias de hogares según sexo del jefe", 
+       x = "Sexo", 
+       y = "Número de hogares")
+
+```
+
+# Análisis bivariado
+
+## Cuanti - cuali
+
+### Medidas numéricas
+
+```{r}
+concentradohogar %>% 
+  group_by(as_label(sexo_jefe)) %>% # renglones en mi tabla
+  summarise(media = mean(ingtrab, na.rm = T), # quitar los missings no duele
+            sd = sd(ingtrab, na.rm = T))
+
+```
+
+### Gráficas
+
+```{r}
+concentradohogar %>% 
+  ggplot()+
+  aes(x = log(ingtrab)) +
+  geom_density() +
+  facet_wrap(~as_label(sexo_jefe))
+
+
+concentradohogar %>% 
+  ggplot()+
+  aes(x = log(ingtrab), color = sjlabelled::as_label(sexo_jefe)) +
+  geom_density() +
+  theme_light() +
+  labs(title = "Distribución ingresos por trabajo",
+       subtitle = "Según sexo del jefe(a) del hogar", 
+       x = "Logaritmos de los ingresos por trabajo (trimestrales)", 
+       y = "Densidad", 
+       caption = "Fuente: ENIGH 2022 datos no ponderados", 
+       color = "Sexo")
+
+```
+
+Ojo en color o fill la variable debe ser factor o caracter, por eso hay que usar el as_label. Si la variable está como caracter se puede poner directo
+
+## Uso de colores
+```{r}
+## Uso de paletas de colores
+
+RColorBrewer::display.brewer.all()
+
+concentradohogar %>% 
+  ggplot()+
+  aes(x = log(ingtrab), color = sjlabelled::as_label(sexo_jefe)) +
+  geom_density() +
+  scale_color_brewer(palette = "Accent", direction = 1 )+
+  theme_light() +
+  labs(title = "Distribución ingresos por trabajo",
+       subtitle = "Según sexo del jefe(a) del hogar", 
+       x = "Logaritmos de los ingresos por trabajo (trimestrales)", 
+       y = "Densidad", 
+       caption = "Fuente: ENIGH 2022 datos no ponderados", 
+       color = "Sexo")
+
+
+concentradohogar %>% 
+  ggplot()+
+  aes(x = log(ingtrab), color = sjlabelled::as_label(sexo_jefe)) +
+  geom_density() +
+  scale_color_manual(values = c("blue", "green"))+
+  theme_light() +
+  labs(title = "Distribución ingresos por trabajo",
+       subtitle = "Según sexo del jefe(a) del hogar", 
+       x = "Logaritmos de los ingresos por trabajo (trimestrales)", 
+       y = "Densidad", 
+       caption = "Fuente: ENIGH 2022 datos no ponderados", 
+       color = "Sexo")
+
+ggsave(plot = last_plot(), 
+       filename = "grafico_final.png",
+       dpi = 500, 
+       width = 9,
+       height = 7)
+
+
+```
+
+`scale_fill_brewer()` y `scale_fill_manual()` sería para el relleno `fill`, pero funcionan igual. 
+
+## GGally
+
+Cuando tenemos muchas variables cuanti y queremos ver su relación, aquí hay un atajo
+
+```{r}
+
+## gg gally
+
+concentradohogar %>% 
+  dplyr::select(ing_cor, edad_jefe, gasto_mon, ingtrab) %>% 
+  GGally::ggpairs() # hoy sí funcionó
+
+```
+
