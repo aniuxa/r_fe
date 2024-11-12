@@ -1,15 +1,39 @@
 # Videos y extras {.unnumbered}
 
-
 ## Sesión 2 de septiembre 2024
 
 {{< video https://youtu.be/JpYLNLJhB7w >}}
 
 ## Sesión 9 de septiembre 2024
 
-{{< video  https://youtu.be/GVweYENQOS8 >}}
+{{< video https://youtu.be/GVweYENQOS8 >}}
 
+## Sesión 30 de septiembre 2024
+
+{{< video https://youtu.be/wAZAKKKW3f8 >}}
+
+-   Hicimos trabajo autónomo con los códigos. Checalos en dropbox.
+
+## Sesión 14 de octubre 2024
+
+{{< video https://youtu.be/a1bb6cvwaBY >}}
+
+## Sesión 21 de octubre de 2024
+
+{{< video https://youtu.be/WWZU43MTCGM >}}
+
+## Sesión 11 de noviembre de 2024
+
+{{< video https://youtu.be/XymrmHpyAvI >}}
 
 ## Cheatsheets
 
 [`{dplyr}`](https://rstudio.github.io/cheatsheets/translations/spanish/data-transformation_es.pdf)
+
+[`{ggplot2}`](https://rstudio.github.io/cheatsheets/translations/spanish/data-visualization_es.pdf)
+
+## Posit cloud
+
+Un pequeño proyecto con los datos de enigh con una muestra por si falla la computadora
+
+<https://posit.cloud/content/8880093>
